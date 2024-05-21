@@ -9,13 +9,14 @@ import { CATEGORIES, TASKS } from "../data";
 
 function App() {
   const [tasks, setTasks] = useState(TASKS);
+  const [categories, setCategories] = useState(CATEGORIES);
 
   const handleTaskFormSubmit = (formData) => {
     setTasks([...tasks, formData]);
   };
 
   const handleDelete = (index) => {
-    setTasks(tasks.filter((task, i) => i !== index));
+    setTasks(tasks.filter((task, oldTask) => oldTask !== index));
   };
 
   return (
@@ -23,7 +24,7 @@ function App() {
       <h2>My tasks</h2>
       <CategoryFilter tasks={tasks} setTasks={setTasks} />
       <NewTaskForm
-        categories={CATEGORIES}
+        categories={categories}
         onTaskFormSubmit={handleTaskFormSubmit}
       />
       <TaskList tasks={tasks} setTasks={setTasks} handleDelete={handleDelete} />
